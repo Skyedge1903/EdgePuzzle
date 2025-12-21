@@ -34,7 +34,7 @@ Pour afficher une solution générée :
 ```bash
 python play.py -conf data/eternity2/eternity2_256_1.csv -hints solutions/partial_solution_X.csv
 ```
-(Remplacez X par le numéro de seed de la solution souhaitée.)
+(Remplacez X par le score de la solution souhaitée.)
 
 ## Prérequis et utilisation
 
