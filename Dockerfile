@@ -5,21 +5,30 @@ ENV PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /app
 
-# Dépendances système nécessaires pour pip
+# Dépendances système COMPLÈTES pour build Python
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
+    g++ \
+    make \
+    cmake \
     libffi-dev \
     libssl-dev \
     python3-dev \
+    libopenblas-dev \
+    liblapack-dev \
+    libstdc++6 \
     supervisor \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip AVANT toute chose
+RUN pip install --upgrade pip setuptools wheel
 
 # Dépendances Python
 COPY requirements.txt .
 
-RUN pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt \
+RUN pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir gunicorn
 
 # Code applicatif
