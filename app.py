@@ -3,7 +3,7 @@ import os
 import re
 import json
 
-app = Flask(__name__)
+server = Flask(__name__)
 IMG_FOLDER = "img"
 LOG_FILE = "log.json"
 
