@@ -142,7 +142,7 @@ def propose_move_numba(board_p, board_r):
 # Sauvegarde CSV
 # ==============================
 def save_board_csv(board_p, board_r, score):
-    os.makedirs("solutions", exist_ok=True)  # Crée le dossier s'il n'existe pas
+    os.makedirs("solutions", exist_ok=True)
     filename = f"solutions/partial_solution_{score}.csv"
 
     if os.path.exists(filename) or score < 480:
@@ -156,16 +156,19 @@ def save_board_csv(board_p, board_r, score):
                 orientation = ((4 - r) % 4 + 3) % 4
                 f.write(f"{i},{j},{p + 1},{orientation}\n")
 
-    # Commande sous forme de liste
     cmd = [
         "python",
         "generate.py",
         "-conf", "data/eternity2/eternity2_256_1.csv",
-        "-hints", f"solutions/partial_solution_{score}.csv"
+        "-hints", filename
     ]
 
-    # Exécution
-    subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    env = os.environ.copy()
+    if os.name != "nt":  # Linux headless / Docker
+        env["SDL_VIDEODRIVER"] = "dummy"
+
+    # NE PAS REDIRIGER LES ERREURS pendant le debug
+    subprocess.run(cmd, check=True, env=env, cwd=os.getcwd())
 
 
 # ==============================
