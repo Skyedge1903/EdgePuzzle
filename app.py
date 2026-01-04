@@ -305,11 +305,7 @@ def log_data():
 # Route pour favicon
 @app.route('/favicon.ico')
 def favicon():
-    try:
-        return flask.send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico')
-    except FileNotFoundError:
-        logger.warning("Favicon.ico non trouvé")
-        return '', 204  # Réponse vide avec statut 204 (No Content)
+    return app.send_static_file('favicon.ico')
 
 if __name__ == "__main__":
     app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))
