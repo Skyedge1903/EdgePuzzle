@@ -28,7 +28,7 @@ ROT = 4
 FIX_I, FIX_J = 8, 7
 FIX_PIECE = 138
 FIX_ROT = 0
-NUM_CHAINS = 3
+NUM_CHAINS = 1
 T0 = 20.0
 T_MIN = 0.01
 ALPHA = 0.99995
@@ -302,5 +302,6 @@ if __name__ == "__main__":
         processes.append(p)
     for p in processes:
         p.join()
+
 
     print(f"{C.BOLD}{C.MAGENTA}| FINAL BEST SCORE {global_best['score']} by SEED {global_best['seed']} |{C.RESET}")
