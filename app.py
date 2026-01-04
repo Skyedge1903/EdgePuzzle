@@ -303,10 +303,10 @@ def log_data():
     return jsonify({"entries": entries, "hash": hash_log(entries)})
 
 # Route pour favicon
-@app.server.route('/favicon.ico')
+@app.route('/favicon.ico')
 def favicon():
     try:
-        return flask.send_from_directory(os.path.join(app.server.root_path, 'static'), 'favicon.ico')
+        return flask.send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico')
     except FileNotFoundError:
         logger.warning("Favicon.ico non trouvé")
         return '', 204  # Réponse vide avec statut 204 (No Content)
