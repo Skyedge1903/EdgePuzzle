@@ -302,5 +302,10 @@ def log_data():
     entries = read_log()
     return jsonify({"entries": entries, "hash": hash_log(entries)})
 
+# Route pour favicon
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('favicon.ico')
+
 if __name__ == "__main__":
     app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))
